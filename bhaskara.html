@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bhaskara.css">
+    <title>Calculadora de Bhaskara</title>
+</head>
+
+<body>
+    <div class="calculator">
+        <h1>Calculadora de Bhaskara</h1>
+        <form id="bhaskara-formula">
+            <label for="a">Valor de A:</label>
+            <input type="number" id="a" required>
+            <label for="b">Valor de B:</label>
+            <input type="number" id="b" required>
+            <label for="c">Valor de C:</label>
+            <input type="number" id="c" required>
+            <button type="submit">Calcular</button>
+        </form>
+        <div id="result"></div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("bhaskara-formula");
+    const resultDiv = document.getElementById("result");
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const a = parseFloat(document.getElementById("a").value);
+        const b = parseFloat(document.getElementById("b").value);
+        const c = parseFloat(document.getElementById("c").value);
+
+        if (!isNaN(a) && !isNaN(b) && !isNaN(c)) {
+            const delta = b * b - 4 * a * c;
+
+            if (delta > 0) {
+                const x1 = (-b + Math.sqrt(delta)) / (2 * a);
+                const x2 = (-b - Math.sqrt(delta)) / (2 * a);
+                resultDiv.innerHTML = `As raízes são: X' = ${x1.toFixed(2)} e X'' = ${x2.toFixed(2)}`;
+            } else if (delta === 0) {
+                const x = -b / (2 * a);
+                resultDiv.innerHTML = `A raiz é dupla: X' = X'' = ${x.toFixed(2)}`;
+            } else {
+                resultDiv.innerHTML = "A equação não possui raízes reais.";
+            }
+        } else {
+            resultDiv.innerHTML = "Preencha os valores de A, B e C corretamente.";
+        }
+    });
+});
+    </script>
+
+</body>
+
+</html>
